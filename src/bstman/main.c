@@ -2,7 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include "tree.h"
 
+//docs https://www.codesdope.com/blog/article/binary-search-tree-in-c/
 
 /* Retorna true si ambos strings son iguales */
 bool string_equals(char *string1, char *string2) {
@@ -36,11 +38,11 @@ int main(int argc, char** argv) {
 
   /* leemos Cada nodo */
   int k;
+  Node *root = NULL;
   for (int i=0; i<node_count; i++) {
     fscanf(input_file, "%d", &k);
-    printf("%d ", k);
+    root = insert(root, k);
   }
-  printf("\n");
 
 
   fscanf(input_file, "%d", &query_count);
@@ -49,11 +51,35 @@ int main(int argc, char** argv) {
   int value;
   for (int i=0; i<query_count; i++) {
     fscanf(input_file, "%s %d", command, &value);
-    printf("%s %d\n", command, value);
+    if (string_equals(command, "ORDER")) {
+      inorder(root, output_file);
+      fprintf(output_file, "\n");
+    }
+    else if (string_equals(command, "PATH")) {
+      Node *node_searched = search(root, value, output_file);
+      if (node_searched != NULL) {
+        fprintf(output_file, "%d\n", node_searched->data);
+      }
+      else {
+        fprintf(output_file, "X\n");
+      }
+    }
+    else if (string_equals(command, "DEEP")) {
+      int deep_value = deep(root, value);
+        fprintf(output_file, "%d\n", deep_value);
+    }
     /* completar la revision de comando y ejecucion de los mismos */
   }
 
+  
   fclose(input_file);
   fclose(output_file);
+
+  ///////////////////////////////////
+  //     Liberamos memoria         //
+  ///////////////////////////////////
+
+  free_tree(root);
+
   return 0;
 }
