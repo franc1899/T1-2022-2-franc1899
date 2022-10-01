@@ -42,3 +42,4 @@ void free_tree(Node *root);
 void filter(Image* img, Node *root, double alpha);
 void mean_Lba(Image* img, Node *root);
 void sd_Lba(Image* img, Node *root);
+int n_leaves(Node *root);

@@ -140,3 +140,16 @@ void filter(Image *img, Node *root, double alpha){
     filter(img, root->SW, alpha);
     filter(img, root->SE, alpha);
 }
+
+int n_leaves(Node *root)
+{
+    if (root == NULL)
+    {
+        return 0;
+    }
+    if (root->is_leaf == true)
+    {
+        return 1;
+    }
+    return n_leaves(root->NW) + n_leaves(root->NE) + n_leaves(root->SW) + n_leaves(root->SE);
+}

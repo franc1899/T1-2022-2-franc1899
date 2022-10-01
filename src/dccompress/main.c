@@ -91,6 +91,14 @@ int main(int argc, char** argv) {
   else if (string_equals(MODE, "compress")) {
     /* Cantidad máxima de hojas que le permitiremos tener al árbol */
     int h = atoi(PARAM);
+    int leaves = n_leaves(root);
+    for (alpha = 0; alpha < 128; alpha++) {
+      filter(img, root, alpha);
+      if (leaves < h){
+        break;
+      }
+      leaves = n_leaves(root);
+    }
 
     /* Buscar el menor alpha tal que el árbol filtrado tiene menos de h hojas */
     // ...
