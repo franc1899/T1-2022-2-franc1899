@@ -58,6 +58,7 @@ int main(int argc, char** argv) {
 
   /* Ruta del archivo PNG de input */
   char* INPUT = argv[1];
+  printf("Input: %s", INPUT);
   /* La imagen de input */
   Image* img = img_png_read_from_file(INPUT);
 
@@ -68,8 +69,8 @@ int main(int argc, char** argv) {
   /* Creamos el árbol con la imagen */
   // ...
   Node *root = NULL;
-  printf("Creando QuadTree...\n");
-  printf("Ancho: %d, Alto: %d\n", img->width, img->height);
+  //printf("Creando QuadTree...\n");
+  //printf("Ancho: %d, Alto: %d\n", img->width, img->height);
   root = insert(img, root, 0, 0, img->width, img->height);
   //printf("sd: %f", root->sd);
 

@@ -80,7 +80,7 @@ void mean_Lba(Image *img, Node *root)
 
 void sd_Lba(Image *img, Node *root)
 {
-    printf("x: %d y: %d width: %d height: %d\n", root->x, root->y, root->width, root->height);
+    //printf("x: %d y: %d width: %d height: %d\n", root->x, root->y, root->width, root->height);
     for (int i = root->x; i < root->x + root->width; i++)
     {
         for (int j = root->y; j < root->y + root->height; j++)
