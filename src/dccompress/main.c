@@ -58,7 +58,6 @@ int main(int argc, char** argv) {
 
   /* Ruta del archivo PNG de input */
   char* INPUT = argv[1];
-  printf("Input: %s", INPUT);
   /* La imagen de input */
   Image* img = img_png_read_from_file(INPUT);
 
