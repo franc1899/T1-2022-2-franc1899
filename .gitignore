@@ -2,3 +2,6 @@ obj/
 .DS_Store
 __pycache__/
 *.txt
+*.png
+p1-imgs
+p2-txt

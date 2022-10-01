@@ -4,6 +4,8 @@
 #include <time.h>
 #include <string.h>
 #include <stdbool.h>
+#include "quadtree.h"
+#include <math.h>
 
 /** Retorna true si ambos strings son iguales */
 bool string_equals(char* string1, char* string2) {
@@ -65,6 +67,11 @@ int main(int argc, char** argv) {
 
   /* Creamos el árbol con la imagen */
   // ...
+  Node *root = NULL;
+  printf("Creando QuadTree...\n");
+  printf("Ancho: %d, Alto: %d\n", img->width, img->height);
+  root = insert(img, root, 0, 0, img->width, img->height);
+  //printf("sd: %f", root->sd);
 
   /* Modo de uso del programa */
   char* MODE = argv[3];
@@ -78,6 +85,7 @@ int main(int argc, char** argv) {
   if (string_equals(MODE, "filter")) {
     /* Entonces usaremos PARAM como límite */
     alpha = atof(PARAM);
+    filter(img, root, alpha);
   }
   /* Si estamos en modo comprimir */
   else if (string_equals(MODE, "compress")) {
@@ -93,13 +101,13 @@ int main(int argc, char** argv) {
 
   // Pintamos un cuadrado de ejemplo //
   // Para tu tarea usa este ejemplo para pintar las imagenes //
-  img_square_paint(
-    img, // Imagen donde se pintara el cuadrado
-    img -> height / 3, // Fila donde comienza el cuadrado
-    img -> width / 4, // Columna donde comienza el cuadrado
-    img -> height / 5, // Largo del lado del cuadrado
-    (Color) {.L = 46.97, .a = 38.96, .b = -69.98} // Color a pintar
-  );
+  //img_square_paint(
+  //  img, // Imagen donde se pintara el cuadrado
+  //  img -> height / 3, // Fila donde comienza el cuadrado
+  // img -> width / 4, // Columna donde comienza el cuadrado
+  //  img -> height / 5, // Largo del lado del cuadrado
+  //  (Color) {.L = 46.97, .a = 38.96, .b = -69.98} // Color a pintar
+  //);
   // Fin ejemplo //
 
   /* Momento en el que terminamos de procesar la imagen */
@@ -117,6 +125,8 @@ int main(int argc, char** argv) {
 
   /* Liberamos la memoria del árbol */
   // ...
+
+  free_tree(root);
 
   /* Liberamos la memoria de la imagen */
   img_png_destroy(img);
