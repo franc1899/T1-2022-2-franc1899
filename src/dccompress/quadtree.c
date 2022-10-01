@@ -40,13 +40,13 @@ Node *insert(Image *img, Node *root, int x, int y, int width, int height)
     }
     else
     {
-        width = width / 2;
-        height = height / 2;
         if (width == 1)
         {
             root->is_leaf = true;
             return root;
         }
+        width = width / 2;
+        height = height / 2;
         //printf("x: %d y: %d width: %d height: %d\n", x, y, width, height);
         root->is_leaf = false;
         root->SW = insert(img, root->SW, x, y + height, width, height);
@@ -80,6 +80,7 @@ void mean_Lba(Image *img, Node *root)
 
 void sd_Lba(Image *img, Node *root)
 {
+    printf("x: %d y: %d width: %d height: %d\n", root->x, root->y, root->width, root->height);
     for (int i = root->x; i < root->x + root->width; i++)
     {
         for (int j = root->y; j < root->y + root->height; j++)
@@ -112,18 +113,18 @@ void free_tree(Node *root)
 void filter(Image *img, Node *root, double alpha){
     if (root == NULL)
     {
-        printf("me voy a la xuxa");
+        //printf("me voy a la xuxa");
         return;
     }
     if (root->is_leaf == true)
     {
-        printf("no wei xd\n");
+        //printf("no wei xd\n");
         return;
     }
     if (root->sd < alpha)
     {   
-        printf("HOLAAAAAA\n");
-        printf("sd: %f\n", root->sd);
+        //printf("HOLAAAAAA\n");
+        //printf("sd: %f\n", root->sd);
         root->is_leaf = true;
         img_square_paint(
             img,
